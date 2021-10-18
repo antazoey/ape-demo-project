@@ -1,23 +1,34 @@
+import pytest
 import ape
 
 _FUND_AMOUNT = 1000000000
 
 
-def test_fund(accounts, project):
-    contract = accounts[0].deploy(project.Fund) 
-    contract.fund(value=_FUND_AMOUNT, sender=accounts[1])
-    assert contract.addressToAmountFunded(accounts[1].address) == _FUND_AMOUNT
+@pytest.fixture
+def owner(accounts):
+    return accounts[0]
 
 
-def test_withdraw_not_owner(accounts, project):
-    contract = accounts[0].deploy(project.Fund)
+@pytest.fixture
+def funder(accounts):
+    return accounts[1]
+
+
+def test_fund(owner, funder, project):
+    contract = owner.deploy(project.Fund) 
+    contract.fund(value=_FUND_AMOUNT, sender=funder)
+    assert contract.addressToAmountFunded(funder.address) == _FUND_AMOUNT
+
+
+def test_withdraw_not_owner(owner, funder, project):
+    contract = owner.deploy(project.Fund)
 
     with ape.reverts("!authorized"):
-        contract.withdraw(sender=accounts[1])
+        contract.withdraw(sender=funder)
 
 
-def test_withdraw(accounts, project):
-    contract = accounts[0].deploy(project.Fund) 
-    contract.fund(value=_FUND_AMOUNT, sender=accounts[1])
-    contract.withdraw(sender=accounts[0])
-    assert contract.addressToAmountFunded(accounts[1].address) == 0
+def test_withdraw(owner, funder, project):
+    contract = owner.deploy(project.Fund) 
+    contract.fund(value=_FUND_AMOUNT, sender=funder)
+    contract.withdraw(sender=owner)
+    assert contract.addressToAmountFunded(funder.address) == 0

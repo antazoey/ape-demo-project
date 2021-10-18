@@ -1,7 +1,7 @@
-from ape.cli import AccountAliasPromptChoice
+from ape.cli import get_user_selected_account
 from ape import project
 
 
 def main():
-    account = AccountAliasPromptChoice().get_user_selected_account()
+    account = get_user_selected_account()
     account.deploy(project.Fund)
