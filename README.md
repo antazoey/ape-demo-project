@@ -1,2 +1,3 @@
 # ducky-dimes
-An ERC20 token implementation for aquatic love boats
+
+This is a silly test project for ape and also a wilderness of experimentation. 🌳 .
