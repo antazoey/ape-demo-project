@@ -20,6 +20,13 @@ def test_fund(owner, funder, project):
     assert contract.addressToAmountFunded(funder.address) == _FUND_AMOUNT
 
 
+def test_fund_zero_value(owner, funder, project):
+    contract = owner.deploy(project.Fund) 
+
+    with ape.reverts("Fund amount must be greater than 0."):
+        contract.fund(value=0, sender=funder)
+
+
 def test_withdraw_not_owner(owner, funder, project):
     contract = owner.deploy(project.Fund)
 

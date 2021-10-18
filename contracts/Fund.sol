@@ -16,7 +16,7 @@ contract Fund {
     }
 
     function fund() public payable {
-        require(msg.value > 0);
+        require(msg.value > 0, "Fund amount must be greater than 0.");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
     }
