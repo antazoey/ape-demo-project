@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "hardhat": "^2.6.6"
+    "hardhat": "^2.6.6",
+    "ansi-regex": ">=5.0.1"
   }
 }
