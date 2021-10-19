@@ -1,16 +1,35 @@
 # Ape Demo Project
 
-This is a project that exists for demo-ing ape. It has:
+This is a project that exists for demo-ing and manually testing ape.
+
+**WARNING: This repo currently uses features in ape that still in development**
+
+## Installation
+
+First, clone this repo and change your working directory.
+
+```bash
+git clone git@github.com:unparalleled-js/ape-demo-project.git
+cd ape-demo-project
+```
+
+Follow the [install instructions](https://github.com/ApeWorX/ape) from `ape`.
+
+Once `ape` is installed, install the plugins for this project.
+
+```bash
+ape plugins install
+```
+
+## Contents
+
+This project contains:
 
 1. contracts
 2. scripts
 3. tests
 
-This repo is useful to testing and demo-ing ape features.
-
-**WARNING: This repo currently uses features in ape that still in development**
-
-## Contracts
+### Contracts
 
 To compile the contracts, do:
 
@@ -20,7 +39,7 @@ ape compile
 
 This creates a `.build/` directory.
 
-## Tests
+### Tests
 
 To run the tests, do
 
@@ -28,11 +47,11 @@ To run the tests, do
 ape test
 ```
 
-## Scripts
+### Scripts
 
 Scripts are in the `scripts/` directory.
 
-### Deploy
+#### Deploy
 
 To deploy the `Fund.sol` contract, run:
 
