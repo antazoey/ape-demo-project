@@ -1,4 +1,4 @@
-from utils import deploy, get_account
+from utils import deploy
 
 
 def main():
