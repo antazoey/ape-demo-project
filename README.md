@@ -13,9 +13,13 @@ git clone git@github.com:unparalleled-js/ape-demo-project.git
 cd ape-demo-project
 ```
 
-Follow the [install instructions](https://github.com/ApeWorX/ape) from `ape`.
+Install the project's requirements:
 
-Once `ape` is installed, install the plugins for this project.
+```bash
+pip install -r requirements-dev.txt 
+```
+
+Now, `ape` should be installed.
 
 ```bash
 ape plugins install

@@ -20,6 +20,14 @@ def test_fund(owner, funder, project):
     assert contract.addressToAmountFunded(funder.address) == _FUND_AMOUNT
 
 
+def test_fund_muliple_times_in_a_row(owner, funder, project):
+    contract = owner.deploy(project.Fund)
+    contract.fund(value=_FUND_AMOUNT, sender=funder)
+    contract.fund(value=_FUND_AMOUNT, sender=funder)
+    contract.fund(value=_FUND_AMOUNT, sender=funder)
+    assert contract.addressToAmountFunded(funder.address) == _FUND_AMOUNT * 3
+
+
 def test_fund_zero_value(owner, funder, project):
     contract = owner.deploy(project.Fund) 
 
