@@ -19,7 +19,7 @@ Install the project's requirements:
 pip install -r requirements-dev.txt 
 ```
 
-Now, `ape` should be installed.
+Now, `ape` should be installed and we can use it to install the required plugins.
 
 ```bash
 ape plugins install
