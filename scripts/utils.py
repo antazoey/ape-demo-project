@@ -12,7 +12,6 @@ def deploy(gas_limit=None):
 def get_account():
     network_name = networks.active_provider.name
     if network_name == "test":
-        breakpoint()
         return accounts[0]
 
     return get_user_selected_account(
