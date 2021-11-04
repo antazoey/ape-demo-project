@@ -12,7 +12,7 @@ def deploy(gas_limit=None):
 def get_account():
     network_name = networks.active_provider.name
     if network_name == "test":
-        return accounts[0]
+        return accounts.test_accounts[0]
 
     return get_user_selected_account(
         prompt_message="Select an account to deploy 'Fund'"
