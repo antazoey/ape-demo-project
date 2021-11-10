@@ -4,9 +4,9 @@ from ape import networks
 from ape import project
 
 
-def deploy(gas_limit=None):
+def deploy(*args, **kwargs):
     account = get_account()
-    return account.deploy(project.Fund, gas_limit=gas_limit)
+    return account.deploy(project.Fund, *args, **kwargs)
 
 
 def get_account():
