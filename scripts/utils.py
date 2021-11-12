@@ -1,11 +1,11 @@
+from ape import accounts, networks, project
 from ape.cli import get_user_selected_account
-from ape import accounts
-from ape import networks
-from ape import project
 
 
 def deploy(*args, **kwargs):
-    account = get_account()
+    account = (
+        accounts.load(kwargs.pop("account")) if "account" in kwargs else get_account()
+    )
     return account.deploy(project.Fund, *args, **kwargs)
 
 

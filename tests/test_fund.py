@@ -1,5 +1,5 @@
-import pytest
 import ape
+import pytest
 
 _FUND_AMOUNT = 1000000000
 
