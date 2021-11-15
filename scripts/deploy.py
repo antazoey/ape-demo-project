@@ -2,4 +2,4 @@ from utils import deploy
 
 
 def main():
-    deploy(account="geth")
+    deploy(account="geth_dev_0")
