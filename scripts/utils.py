@@ -4,9 +4,21 @@ from ape.cli import get_user_selected_account
 
 def deploy(*args, **kwargs):
     account = (
-        accounts.load(kwargs.pop("account")) if "account" in kwargs else get_account()
+        _load_account_from_key("account", kwargs)
+        or _load_account_from_key("sender", kwargs)
+        or get_account()
     )
     return account.deploy(project.Fund, *args, **kwargs)
+
+
+def _load_account_from_key(key: str, kwargs):
+    if key in kwargs:
+        account = kwargs.pop(key)
+        if isinstance(account, str):
+            return accounts.load(account)
+
+        # Assume already loaded
+        return account
 
 
 def get_account():
