@@ -1,3 +1,8 @@
+"""
+Deploy `Fund.sol` and make a few normal requests to it.
+"""
+
+
 from ape import accounts
 
 from utils import deploy

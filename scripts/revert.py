@@ -1,3 +1,10 @@
+"""
+Deploy `Fund.sol` and make a request to it
+that should revert.
+
+This is for manual experience testing.
+"""
+
 from ape import accounts
 
 from utils import deploy
