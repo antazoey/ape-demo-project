@@ -47,3 +47,23 @@ def test_withdraw(owner, funder, project):
     contract.fund(value=_FUND_AMOUNT, sender=funder)
     contract.withdraw(sender=owner)
     assert contract.addressToAmountFunded(funder.address) == 0
+
+
+def test_withdraw_disabled(owner, funder, project):
+    contract = owner.deploy(project.Fund)
+    contract.fund(value=_FUND_AMOUNT, sender=funder)
+    contract.changeOnStatus(False, sender=owner)
+
+    with ape.reverts():
+        contract.withdraw(sender=owner)
+
+    with ape.reverts():
+        contract.fund(value=_FUND_AMOUNT, sender=funder)
+
+    with ape.reverts("!authorized"):
+        contract.changeOnStatus(False, sender=funder)
+
+    contract.changeOnStatus(True, sender=owner)
+    contract.withdraw(sender=owner)
+
+    assert contract.addressToAmountFunded(funder.address) == 0
