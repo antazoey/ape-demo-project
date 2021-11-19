@@ -51,7 +51,6 @@ def test_withdraw(owner, funder, project):
 
 def test_withdraw_disabled(owner, funder, project):
     contract = owner.deploy(project.Fund)
-    contract.fund(value=_FUND_AMOUNT, sender=funder)
     contract.changeOnStatus(False, sender=owner)
 
     with ape.reverts():
