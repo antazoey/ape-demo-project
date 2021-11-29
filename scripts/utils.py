@@ -30,8 +30,12 @@ def get_account(prompt=None):
 
 
 def is_test_network() -> bool:
-    network_name = networks.active_provider.name
+    network_name = get_provider().name
     return network_name == "test"
+
+
+def get_provider():
+    return networks.active_provider
 
 
 def get_owner_and_funder():
