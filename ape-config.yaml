@@ -1,3 +1,6 @@
 plugins:
   - name: solidity
     version: 0.1.0a3
+#hardhat:
+#   mainnet_fork:
+#     upstream_provider: infura

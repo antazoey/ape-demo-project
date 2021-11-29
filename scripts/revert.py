@@ -7,7 +7,6 @@ This is for manual experience testing.
 
 import click
 from ape.exceptions import ContractLogicError
-
 from utils import deploy, get_owner_and_funder
 
 
