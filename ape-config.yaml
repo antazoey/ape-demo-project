@@ -2,6 +2,7 @@ plugins:
   - name: solidity
     version: 0.1.0a3
   - name: alchemy
+  - name: hardhat
 hardhat:
   mainnet_fork:
     upstream_provider: alchemy
