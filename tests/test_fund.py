@@ -14,6 +14,13 @@ def funder(accounts):
     return accounts[1]
 
 
+def test_owner(owner, project):
+    contract = owner.deploy(project.Fund)
+    actual = contract.owner()
+    expected = owner.address
+    assert actual == expected
+
+
 def test_fund(owner, funder, project):
     contract = owner.deploy(project.Fund)
     contract.fund(value=_FUND_AMOUNT, sender=funder)
