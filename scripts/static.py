@@ -15,5 +15,6 @@ def main():
     owner, funder = get_owner_and_funder()
     contract = deploy(sender=owner, type=0)
     gas_price = get_provider().gas_price
-    contract.fund(value=1000000000, sender=funder, gas_price=gas_price)
-    contract.withdraw(sender=owner, type="0x0")
+    contract.fund(value=1000000000, sender=funder, gas_price=1000000000)
+    from hexbytes import HexBytes
+    contract.withdraw(sender=owner, type=b"0")

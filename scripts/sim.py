@@ -11,5 +11,5 @@ def main():
     """
     owner, funder = get_owner_and_funder()
     contract = deploy(sender=owner)
-    contract.fund(value=1000000000, sender=funder)
+    contract.fund(value=1000000000, sender=funder, max_priorty_fee=50000000000, max_fee=100000000000)
     contract.withdraw(sender=owner)

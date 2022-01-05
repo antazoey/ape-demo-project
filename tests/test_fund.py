@@ -24,7 +24,8 @@ def test_owner(owner, project):
 def test_fund(owner, funder, project):
     contract = owner.deploy(project.Fund)
     contract.fund(value=_FUND_AMOUNT, sender=funder)
-    assert contract.addressToAmountFunded(funder.address) == _FUND_AMOUNT
+    actual = contract.addressToAmountFunded(funder)
+    assert actual == _FUND_AMOUNT
 
 
 def test_fund_muliple_times_in_a_row(owner, funder, project):
@@ -32,7 +33,7 @@ def test_fund_muliple_times_in_a_row(owner, funder, project):
     contract.fund(value=_FUND_AMOUNT, sender=funder)
     contract.fund(value=_FUND_AMOUNT, sender=funder)
     contract.fund(value=_FUND_AMOUNT, sender=funder)
-    assert contract.addressToAmountFunded(funder.address) == _FUND_AMOUNT * 3
+    assert contract.addressToAmountFunded(funder) == _FUND_AMOUNT * 3
 
 
 def test_fund_zero_value(owner, funder, project):
@@ -53,7 +54,7 @@ def test_withdraw(owner, funder, project):
     contract = owner.deploy(project.Fund)
     contract.fund(value=_FUND_AMOUNT, sender=funder)
     contract.withdraw(sender=owner)
-    assert contract.addressToAmountFunded(funder.address) == 0
+    assert contract.addressToAmountFunded(funder) == 0
 
 
 def test_withdraw_disabled(owner, funder, project):
@@ -72,4 +73,4 @@ def test_withdraw_disabled(owner, funder, project):
     contract.changeOnStatus(True, sender=owner)
     contract.withdraw(sender=owner)
 
-    assert contract.addressToAmountFunded(funder.address) == 0
+    assert contract.addressToAmountFunded(funder) == 0
