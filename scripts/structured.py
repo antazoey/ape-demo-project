@@ -66,7 +66,9 @@ def main():
 
     signer = Account.recover_message(message, signature=signature_bytes)
     if signer != account.address:
-        click.echo(f"Signer resolves incorrectly, got {signer}, expected {account.address}.")
+        click.echo(
+            f"Signer resolves incorrectly, got {signer}, expected {account.address}."
+        )
         return
 
     click.echo("Signature: " + signature.encode_vrs().hex())

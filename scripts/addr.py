@@ -1,11 +1,12 @@
 from ape import accounts, project
 
+
 def main():
     account = accounts.test_accounts[0]
     funder = accounts.test_accounts[1]
 
     contract = account.deploy(project.Fund)
-    
+
     print("Call method from normal deployed contract...")
     contract.fund(value=1000000000, sender=funder)
     address = contract.address

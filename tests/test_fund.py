@@ -4,12 +4,12 @@ import pytest
 _FUND_AMOUNT = 1000000000
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def owner(accounts):
     return accounts[0]
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def funder(accounts):
     return accounts[1]
 

@@ -3,4 +3,5 @@ plugins:
   - name: alchemy
   - name: hardhat
 
-
+# keyring:
+#   set_env_vars: true
