@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "hardhat": "^2.6.8",
-    "ansi-regex": ">=5.0.1"
+    "ansi-regex": ">=5.0.1",
+    "hardhat": "^0.0.7"
   }
 }
