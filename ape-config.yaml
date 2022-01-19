@@ -2,6 +2,7 @@ plugins:
   - name: solidity
   - name: alchemy
   - name: hardhat
+  - name: keyring
 
-# keyring:
-#   set_env_vars: true
+keyring:
+  set_env_vars: true
