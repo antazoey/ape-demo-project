@@ -9,4 +9,3 @@ def main():
     txns = chain.account_history[account]
     for txn in txns:
         click.echo(txn)
-        click.echo()

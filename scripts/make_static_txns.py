@@ -15,4 +15,4 @@ def main():
     owner, funder = get_owner_and_funder()
     contract = deploy(sender=owner, type=0)
     contract.fund(value=1000000000, sender=funder, gas_price=1000000000)
-    contract.withdraw(sender=owner, type=b"0")
+    contract.withdraw(sender=owner, type=0)

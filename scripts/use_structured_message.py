@@ -62,7 +62,7 @@ def main():
     account = get_account()
     message = encode_structured_data(primitive=DATA)
     signature = account.sign_message(message)
-    signature_bytes = signature.encode_rsv
+    signature_bytes = signature.encode_rsv()
 
     signer = Account.recover_message(message, signature=signature_bytes)
     if signer != account.address:
