@@ -12,7 +12,7 @@ def main():
     explorer = networks.ethereum.mainnet.explorer
     if not explorer:
         raise NetworkError("Not connected to mainnet.")
-    
+
     contract = explorer.get_contract_type(CONTRACT_ADDRESS)
     proxy = explorer.get_contract_type(PROXY_CONTRACT_ADDRESS)
 
