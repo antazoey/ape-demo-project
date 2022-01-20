@@ -1,8 +1,9 @@
 from webbrowser import get
-from ape import chain
-import click
 
-from utils import get_account, get_provider
+import click
+from ape import chain
+
+from .utils import get_account, get_provider
 
 
 def main():

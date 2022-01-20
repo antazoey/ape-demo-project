@@ -2,8 +2,7 @@ import click
 from eth_account import Account
 from eth_account.messages import encode_structured_data
 
-from utils import get_account
-
+from .utils import get_account
 
 DATA = {
     "domain": {

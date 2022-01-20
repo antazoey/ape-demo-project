@@ -2,7 +2,7 @@
 Deploy `Fund.sol` and make a few normal requests to it.
 """
 
-from utils import deploy, get_owner_and_funder
+from .utils import deploy, get_owner_and_funder
 
 
 def main():

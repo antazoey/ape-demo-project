@@ -1,4 +1,4 @@
-from utils import get_account
+from .utils import get_account
 
 
 def main():

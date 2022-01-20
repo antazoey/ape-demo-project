@@ -1,5 +1,4 @@
 import click
-
 from ape import networks
 
 

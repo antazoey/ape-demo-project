@@ -1,8 +1,6 @@
-from click import echo
-
 from ape import networks
 from ape.exceptions import NetworkError
-
+from click import echo
 
 CONTRACT_ADDRESS = "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D"
 PROXY_CONTRACT_ADDRESS = "0xa354F35829Ae975e850e23e9615b11Da1B3dC4DE"
