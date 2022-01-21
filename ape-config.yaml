@@ -6,3 +6,7 @@ plugins:
 
 keyring:
   set_env_vars: true
+
+
+# ethereum:
+#   default_network: mainnet-fork
