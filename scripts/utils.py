@@ -30,8 +30,9 @@ def get_account(prompt=None):
 
 
 def is_test_network() -> bool:
-    network_name = get_provider().name
-    return network_name == "test"
+    test_networks = ["development", "mainnet-fork"]
+    network_name = networks.active_provider.network.name
+    return network_name in test_networks
 
 
 def get_provider():
