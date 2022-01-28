@@ -1,5 +1,3 @@
-from webbrowser import get
-
 import click
 from ape import chain
 
