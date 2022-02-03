@@ -6,3 +6,7 @@ plugins:
 
 keyring:
   set_env_vars: true
+
+hardhat:
+  mainnet_fork:
+    upstream_provider: alchemy
