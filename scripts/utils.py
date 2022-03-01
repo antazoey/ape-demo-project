@@ -1,3 +1,5 @@
+import click
+
 from ape import accounts, networks, project
 from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.cli import get_user_selected_account
@@ -9,6 +11,7 @@ def deploy(*args, **kwargs):
         or _load_account_from_key("sender", kwargs)
         or get_account(prompt="Select an account to deploy 'Fund.sol'")
     )
+    click.echo(f"Using account '{account.alias} - {account.address}'")
     return account.deploy(project.Fund, *args, **kwargs)
 
 
