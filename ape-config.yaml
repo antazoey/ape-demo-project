@@ -7,6 +7,19 @@ plugins:
 keyring:
   set_env_vars: true
 
+ethereum:
+  mainnet:
+    default_provider: alchemy
+
 hardhat:
   mainnet_fork:
     upstream_provider: alchemy
+
+dependencies:
+  - name: OpenZeppelin
+    github: OpenZeppelin/openzeppelin-contracts
+    version: 4.4.2
+
+solidity:
+  import_remapping:
+    - "@openzeppelin=OpenZeppelin/4.4.2"

@@ -5,7 +5,7 @@ uses the static type.
 This is for manual experience testing.
 """
 
-from .utils import deploy, get_owner_and_funder
+from ._utils import deploy, get_owner_and_funder
 
 
 def main():

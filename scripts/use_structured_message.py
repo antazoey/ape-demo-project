@@ -2,7 +2,7 @@ import click
 from eth_account import Account
 from eth_account.messages import encode_structured_data
 
-from .utils import get_account
+from ._utils import get_account
 
 DATA = {
     "domain": {
@@ -65,9 +65,7 @@ def main():
 
     signer = Account.recover_message(message, signature=signature_bytes)
     if signer != account.address:
-        click.echo(
-            f"Signer resolves incorrectly, got {signer}, expected {account.address}."
-        )
+        click.echo(f"Signer resolves incorrectly, got {signer}, expected {account.address}.")
         return
 
     click.echo("Signature: " + signature.encode_vrs().hex())

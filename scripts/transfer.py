@@ -1,8 +1,10 @@
-from .utils import get_account
+import click
+
+from ._utils import get_account
 
 
 def main():
     sender = get_account("Which account is the sender")
     receiver = get_account("Which account is the receiver")
     sender.transfer(receiver, "1 gwei")
-    print("done")
+    click.echo("done")

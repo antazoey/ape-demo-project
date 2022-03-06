@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.2;
 
 contract Fund {
     address public owner;
@@ -33,7 +33,7 @@ contract Fund {
     }
 
     function withdraw() public payable onlyOwner isOn {
-        msg.sender.transfer(address(this).balance);
+        payable(msg.sender).transfer(address(this).balance);
 
         for (uint funderIndex=0; funderIndex < funders.length; funderIndex++) {
             address funder = funders[funderIndex];

@@ -1,6 +1,6 @@
 import click
 
-from .utils import deploy
+from ._utils import deploy
 
 
 def main():

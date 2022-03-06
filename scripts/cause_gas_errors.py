@@ -5,7 +5,7 @@ For testing how networks handle various bad gas values.
 import click
 from ape.exceptions import TransactionError
 
-from .utils import deploy, get_account
+from ._utils import deploy, get_account
 
 TOO_HIGH = 999999999999999999
 

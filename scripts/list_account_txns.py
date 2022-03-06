@@ -4,7 +4,7 @@ from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.cli import Abort
 from ape.logging import logger
 
-from .utils import get_account, get_provider
+from ._utils import get_account, get_provider
 
 
 def main():

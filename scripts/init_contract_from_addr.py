@@ -1,3 +1,4 @@
+import click
 from ape import accounts, project
 
 
@@ -7,10 +8,10 @@ def main():
 
     contract = account.deploy(project.Fund)
 
-    print("Call method from normal deployed contract...")
+    click.echo("Call method from normal deployed contract...")
     contract.fund(value=1000000000, sender=funder)
     address = contract.address
 
-    print("Call method from contract initialized from address...")
+    click.echo("Call method from contract initialized from address...")
     contract_from_address = project.Fund.at(address)
     contract_from_address.fund(value=1000000000, sender=funder)
