@@ -3,8 +3,13 @@ Deploys the `Fund.sol` contract.
 If not using the eth-tester network, you will be prompted to select an account.
 """
 
-from ._utils import deploy
+import click
+from ape.cli import NetworkBoundCommand, network_option
+
+from ._utils import deploy as deploy
 
 
-def main():
+@click.command(cls=NetworkBoundCommand)
+@network_option()
+def cli(network):
     deploy()
