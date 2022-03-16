@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-contract Fund {
+contract FundMe {
     address public owner;
     mapping(address => uint256) public addressToAmountFunded;
     address[] public funders;
     bool public enabled;
 
-    constructor() public {
+    constructor() {
         owner = msg.sender;
         enabled = true;
     }
@@ -22,6 +22,8 @@ contract Fund {
         _;
     }
 
+    event Fund(address indexed _funder, uint256 _amount);
+
     function changeOnStatus(bool newValue) public onlyOwner {
         enabled = newValue;
     }
@@ -30,6 +32,7 @@ contract Fund {
         require(msg.value > 0, "Fund amount must be greater than 0.");
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
+        emit Fund(msg.sender, msg.value);
     }
 
     function withdraw() public payable onlyOwner isOn {

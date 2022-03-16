@@ -19,11 +19,11 @@ def main():
     assert account.balance
 
     logger.info("Deploying smart contract using Static txn...")
-    account.deploy(project.Fund, type=0)
+    account.deploy(project.FundMe, type=0)
     logger.success("Smart contract deployed!")
 
     logger.info("Deploying smart contract using Dynamic txn...")
-    account.deploy(project.Fund, gas_limit=30029122)
+    account.deploy(project.FundMe, gas_limit=30029122)
     logger.success("Smart contract deployed!")
 
     logger.info("Returning funds to funder statically...")

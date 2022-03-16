@@ -11,14 +11,14 @@ from ape.exceptions import ProviderError
 Account = Union[AccountAPI, TestAccountAPI]
 
 
-def deploy(*args, **kwargs) -> ContractInstance:
+def deploy_fund_me(*args, **kwargs) -> ContractInstance:
     account = (
         _load_account_from_key("account", kwargs)
         or _load_account_from_key("sender", kwargs)
         or get_account(prompt="Select an account to deploy 'Fund.sol'")
     )
     click.echo(f"Using account '{account.alias} - {account.address}'")
-    return account.deploy(project.Fund, *args, **kwargs)
+    return account.deploy(project.FundMe, *args, **kwargs)
 
 
 def _load_account_from_key(key: str, kwargs) -> Optional[Account]:

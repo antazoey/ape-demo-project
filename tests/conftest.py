@@ -13,7 +13,7 @@ def funder(accounts):
 
 @pytest.fixture
 def fund_contract(owner, project):
-    return owner.deploy(project.Fund)
+    return owner.deploy(project.FundMe)
 
 
 @pytest.fixture
