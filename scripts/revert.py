@@ -8,7 +8,7 @@ This is for manual experience testing.
 import click
 from ape.exceptions import ContractLogicError
 
-from ._utils import deploy, get_owner_and_funder
+from ._utils import deploy_fund_me, get_owner_and_funder
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
     Deploys a contract and forcibly cause a contract-logic revert.
     """
     owner, funder = get_owner_and_funder()
-    contract = deploy(sender=owner)
+    contract = deploy_fund_me(sender=owner)
     contract.fund(value=1000000000, sender=funder)
 
     try:
