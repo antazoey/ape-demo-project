@@ -3,6 +3,10 @@ from ape import accounts, project
 from ape.logging import LogLevel, logger
 
 
+def echo_log(log):
+    logger.success(f"Found event '{log.name}' with funder={log.funder} amount={log.amount}")
+
+
 class main:
     logger.set_level(100)
     owner = accounts.test_accounts[0]
@@ -15,9 +19,17 @@ class main:
 
     click.echo(f"Triggering '{event_name}'...")
     receipt = fund_me_contract.fund(sender=funder, value=100)
-    logs = fund_me_contract.Fund.from_receipt(receipt)
 
-    for log in logs:
-        click.echo(log.name)
-        click.echo(log.funder)
-        click.echo(log.amount)
+    click.echo("Reading log from receipt...")
+    log = [log for log in fund_me_contract.Fund.from_receipt(receipt)][0]
+    echo_log(log)
+    click.echo()
+
+    click.echo("Reading log from event[index]...")
+    log = fund_me_contract.Fund[-1]
+    echo_log(log)
+    click.echo()
+
+    click.echo("Reading log from event.filter()[index]...")
+    log = [log for log in fund_me_contract.Fund.filter(funder=funder)][0]
+    echo_log(log)
