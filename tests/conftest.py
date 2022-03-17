@@ -12,10 +12,10 @@ def funder(accounts):
 
 
 @pytest.fixture
-def fund_me_contract(owner, project):
+def solidity_contract(owner, project):
     return owner.deploy(project.FundMe)
 
 
 @pytest.fixture
-def snake_contract(owner, project):
-    return owner.deploy(project.Snake)
+def vyper_contract(owner, project):
+    return owner.deploy(project.TestContract)
