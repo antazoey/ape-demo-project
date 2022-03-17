@@ -25,7 +25,10 @@ def test_fund_muliple_times_in_a_row(fund_me_contract, funder):
 def test_fund_emits_event(fund_me_contract, funder):
     receipt = fund_me_contract.fund(value=FUND_AMOUNT, sender=funder)
     event_type = fund_me_contract.Fund
-    assert event_type.from_receipt(receipt)
+    fund_events = [e for e in event_type.from_receipt(receipt)]
+    assert len(fund_events) == 1
+    assert fund_events[0].funder == funder
+    assert fund_events[0].amount == FUND_AMOUNT
 
 
 def test_fund_zero_value(fund_me_contract, funder):

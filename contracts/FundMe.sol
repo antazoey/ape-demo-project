@@ -22,7 +22,7 @@ contract FundMe {
         _;
     }
 
-    event Fund(address indexed _funder, uint256 _amount);
+    event Fund(address indexed funder, uint256 amount);
 
     function changeOnStatus(bool newValue) public onlyOwner {
         enabled = newValue;

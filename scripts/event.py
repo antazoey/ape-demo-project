@@ -19,5 +19,5 @@ class main:
 
     for log in logs:
         click.echo(log.name)
-        click.echo(log._funder)
-        click.echo(log._amount)
+        click.echo(log.funder)
+        click.echo(log.amount)
