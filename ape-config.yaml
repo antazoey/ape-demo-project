@@ -4,8 +4,8 @@ plugins:
   - name: hardhat
   - name: keyring
 
-keyring:
-  set_env_vars: true
+# keyring:
+#   set_env_vars: true
 
 ethereum:
   mainnet:

@@ -22,6 +22,12 @@ def test_fund_muliple_times_in_a_row(fund_me_contract, funder):
     assert fund_me_contract.addressToAmountFunded(funder) == FUND_AMOUNT * 3
 
 
+def test_fund_emits_event(fund_me_contract, funder):
+    receipt = fund_me_contract.fund(value=FUND_AMOUNT, sender=funder)
+    event_type = fund_me_contract.Fund
+    assert event_type.from_receipt(receipt)
+
+
 def test_fund_zero_value(fund_me_contract, funder):
     with ape.reverts("Fund amount must be greater than 0."):
         fund_me_contract.fund(value=0, sender=funder)
