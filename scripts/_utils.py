@@ -6,9 +6,13 @@ from ape.api import AccountAPI, ProviderAPI, TestAccountAPI
 from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.cli import get_user_selected_account
 from ape.contracts.base import ContractInstance
-from ape.exceptions import ProviderError
+from ape.exceptions import ApeException, ProviderError
 
 Account = Union[AccountAPI, TestAccountAPI]
+
+
+class ScriptError(ApeException):
+    pass
 
 
 def deploy_fund_me(*args, **kwargs) -> ContractInstance:
