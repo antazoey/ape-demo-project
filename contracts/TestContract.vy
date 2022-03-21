@@ -6,7 +6,7 @@ prev_number: public(uint256)
 
 event NumberChange:
     prev_num: uint256
-    new_num: uint256
+    new_num: indexed(uint256)
 
 @external
 def __init__():
