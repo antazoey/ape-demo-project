@@ -10,7 +10,7 @@ plugins:
 deployments:
   ethereum:
     rinkeby:
-    - address: 0x0c25212c557d00024b7Ca3df3238683A35541354
+    - address: "0x0c25212c557d00024b7Ca3df3238683A35541354"
       contract_type: TestContract
 
 ethereum:
@@ -18,8 +18,10 @@ ethereum:
     default_provider: alchemy
 
 hardhat:
-  mainnet_fork:
-    upstream_provider: alchemy
+  fork:
+    ethereum:
+      mainnet_fork:
+        upstream_provider: alchemy
 
 dependencies:
   - name: OpenZeppelin
