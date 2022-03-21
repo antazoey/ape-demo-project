@@ -7,6 +7,12 @@ plugins:
 # keyring:
 #   set_env_vars: true
 
+deployments:
+  ethereum:
+    rinkeby:
+    - address: 0x0c25212c557d00024b7Ca3df3238683A35541354
+      contract_type: TestContract
+
 ethereum:
   mainnet:
     default_provider: alchemy

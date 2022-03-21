@@ -1,9 +1,9 @@
 import click
 
-from ._utils import deploy_fund_me
+from ._utils import deploy
 
 
 def main():
-    contract = deploy_fund_me()
+    contract = deploy()
     owner = contract.owner()
     click.echo(owner)

@@ -15,14 +15,16 @@ class ScriptError(ApeException):
     pass
 
 
-def deploy_fund_me(*args, **kwargs) -> ContractInstance:
+def deploy(*args, **kwargs) -> ContractInstance:
+    contract_type = kwargs.pop("contract_type", "FundMe")
     account = (
         _load_account_from_key("account", kwargs)
         or _load_account_from_key("sender", kwargs)
-        or get_account(prompt="Select an account to deploy 'Fund.sol'")
+        or get_account(prompt=f"Select an account to deploy '{contract_type}'")
     )
     click.echo(f"Using account '{account.alias} - {account.address}'")
-    return account.deploy(project.FundMe, *args, **kwargs)
+    contract_type = project.get_contract(contract_type)
+    return account.deploy(contract_type, *args, **kwargs)
 
 
 def _load_account_from_key(key: str, kwargs) -> Optional[Account]:
