@@ -15,12 +15,12 @@ deployments:
 
 ethereum:
   mainnet:
-    default_provider: alchemy
+    default_provider: infura
 
 hardhat:
   fork:
     ethereum:
-      mainnet_fork:
+      mainnet:
         upstream_provider: alchemy
 
 dependencies:
