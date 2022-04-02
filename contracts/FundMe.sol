@@ -24,6 +24,10 @@ contract FundMe {
 
     event Fund(address indexed funder, uint256 amount);
 
+    function getSecret() public onlyOwner view returns(uint256 secret) {
+        return 123;
+    }
+
     function changeOnStatus(bool newValue) public onlyOwner {
         enabled = newValue;
     }
