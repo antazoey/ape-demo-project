@@ -63,3 +63,13 @@ def test_withdraw_disabled(solidity_contract, owner, funder):
     solidity_contract.withdraw(sender=owner)
 
     assert solidity_contract.addressToAmountFunded(funder) == 0
+
+
+def test_get_secret(solidity_contract, owner):
+    actual = solidity_contract.getSecret(sender=owner)
+    assert actual == 123
+
+
+def test_only_owner_can_view_secret(solidity_contract, funder):
+    with ape.reverts("!authorized"):
+        solidity_contract.getSecret()
