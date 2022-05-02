@@ -24,19 +24,19 @@ hardhat:
         upstream_provider: alchemy
 
 dependencies:
-  - name: OpenZeppelin
-    github: OpenZeppelin/openzeppelin-contracts
-    version: 4.4.2
+  # - name: OpenZeppelin
+  #   github: OpenZeppelin/openzeppelin-contracts
+  #   version: 4.4.2
   - name: ds-test
     github: dapphub/ds-test
     branch: master
     contracts_folder: src
-  - name: solidity-bytes-utils
-    github: GNSPS/solidity-bytes-utils
-    version: 0.8.0
-  - name: vault
-    github: yearn/yearn-vaults
-    version: 0.4.3
+  # - name: solidity-bytes-utils
+  #   github: GNSPS/solidity-bytes-utils
+  #   version: 0.8.0
+  # - name: vault
+  #   github: yearn/yearn-vaults
+  #   version: 0.4.3
 
 solidity:
   import_remapping:
