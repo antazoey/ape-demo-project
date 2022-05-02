@@ -14,3 +14,4 @@ from ._utils import deploy
 @click.option("--contract", help="The contract to deploy.", default="FundMe")
 def cli(network, contract):
     deploy(contract_type=contract)
+    deploy(contract_type=contract)

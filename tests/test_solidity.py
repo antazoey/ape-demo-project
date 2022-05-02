@@ -72,4 +72,4 @@ def test_get_secret(solidity_contract, owner):
 
 def test_only_owner_can_view_secret(solidity_contract, funder):
     with ape.reverts("!authorized"):
-        solidity_contract.getSecret()
+        solidity_contract.getSecret(sender=funder)
