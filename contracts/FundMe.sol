@@ -9,6 +9,14 @@ contract FundMe {
     address[] public funders;
     bool public enabled;
 
+    error InsufficientFund(uint256 given, uint256 required);
+
+    struct Book { 
+      string title;
+      string author;
+      uint book_id;
+    }
+
     constructor() {
         owner = msg.sender;
         enabled = true;
@@ -30,15 +38,29 @@ contract FundMe {
         return 123;
     }
 
+    function getSecrets() public onlyOwner view returns(uint256 secret1, uint256 secret2) {
+        return (123, 321);
+    }
+
+    function getSecretsNotAllNamed() public onlyOwner view returns(uint256, uint256 secret2) {
+        return (123, 321);
+    }
+
     function changeOnStatus(bool newValue) public onlyOwner {
         enabled = newValue;
     }
 
     function fund() public payable isOn {
-        require(msg.value > 0, "Fund amount must be greater than 0.");
+        if (msg.value <= 0) {
+            revert InsufficientFund(msg.value, 1);
+        }
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
         emit Fund(msg.sender, msg.value);
+    }
+
+    function getBook() public pure returns(Book memory) {
+        return Book('Learn Python', 'TP', 1);
     }
 
     function withdraw() public payable onlyOwner isOn {

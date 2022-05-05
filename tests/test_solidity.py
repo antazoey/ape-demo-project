@@ -1,4 +1,5 @@
 import ape
+import pytest
 
 FUND_AMOUNT = 1000000000
 
@@ -32,7 +33,7 @@ def test_fund_emits_event(solidity_contract, funder):
 
 
 def test_fund_zero_value(solidity_contract, funder):
-    with ape.reverts("Fund amount must be greater than 0."):
+    with ape.reverts():
         solidity_contract.fund(value=0, sender=funder)
 
 
@@ -70,6 +71,12 @@ def test_get_secret(solidity_contract, owner):
     assert actual == 123
 
 
-def test_only_owner_can_view_secret(solidity_contract, funder):
-    with ape.reverts("!authorized"):
-        solidity_contract.getSecret(sender=funder)
+def test_get_secrets(solidity_contract, owner):
+    actual = solidity_contract.getSecrets(sender=owner)
+    assert actual[0] == 123
+
+
+@pytest.mark.xfail(strict=False, reason="Waiting for APE PR to merge")
+def test_structs(solidity_contract):
+    actual = solidity_contract.getBook()
+    assert actual.title == "Learn Python"

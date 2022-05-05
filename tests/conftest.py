@@ -18,4 +18,4 @@ def solidity_contract(owner, project):
 
 @pytest.fixture
 def vyper_contract(owner, project):
-    return owner.deploy(project.TestContract)
+    return owner.deploy(project.TestContractVy)

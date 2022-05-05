@@ -14,12 +14,21 @@ deployments:
       contract_type: TestContract
 
 ethereum:
+  default_network: rinkeby-fork
+  rinkeby:
+    default_provider: alchemy
+  rinkeby_fork:
+    default_provider: hardhat
+
   mainnet:
-    default_provider: infura
+    default_provider: alchemy
 
 hardhat:
   fork:
     ethereum:
+      rinkeby:
+        upstream_provider: alchemy
+
       mainnet:
         upstream_provider: alchemy
 

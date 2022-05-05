@@ -62,9 +62,12 @@ account_loader = AccountLoader()
 
 def is_test_network() -> bool:
     test_networks = [LOCAL_NETWORK_NAME]
+    return get_network_name() in test_networks
+
+
+def get_network_name() -> str:
     provider = get_provider()
-    network_name = provider.network.name
-    return network_name in test_networks
+    return provider.network.name
 
 
 def get_provider() -> ProviderAPI:
