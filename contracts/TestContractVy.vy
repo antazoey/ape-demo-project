@@ -12,7 +12,12 @@ struct MyStruct:
     a: address
     b: bytes32
 
-struct NestedStruct:
+struct NestedStruct1:
+    t: MyStruct
+    foo: uint256
+
+struct NestedStruct2:
+    foo: uint256
     t: MyStruct
 
 @external
@@ -34,8 +39,23 @@ def getStruct() -> MyStruct:
 
 @view
 @external
-def getNestedStruct() -> NestedStruct:
-    return NestedStruct({t: MyStruct({a: msg.sender, b: block.prevhash})})
+def getNestedStruct1() -> NestedStruct1:
+    return NestedStruct1({t: MyStruct({a: msg.sender, b: block.prevhash}), foo: 1})
+
+@view
+@external
+def getNestedStruct2() -> NestedStruct2:
+    return NestedStruct2({foo: 2, t: MyStruct({a: msg.sender, b: block.prevhash})})
+
+@view
+@external
+def getNestedStructWithTuple1() -> (NestedStruct1, uint256):
+    return (NestedStruct1({t: MyStruct({a: msg.sender, b: block.prevhash}), foo: 1}), 1)
+
+@view
+@external
+def getNestedStructWithTuple2() -> (uint256, NestedStruct2):
+    return (2, NestedStruct2({foo: 2, t: MyStruct({a: msg.sender, b: block.prevhash})}))
 
 @pure
 @external

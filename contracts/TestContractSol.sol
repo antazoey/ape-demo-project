@@ -13,7 +13,13 @@ contract TestContractSol {
         bytes32 b;
     }
 
-    struct NestedStruct {
+    struct NestedStruct1 {
+        MyStruct t;
+        uint256 foo;
+    }
+
+    struct NestedStruct2 {
+        uint256 foo;
         MyStruct t;
     }
 
@@ -33,8 +39,20 @@ contract TestContractSol {
         return MyStruct(msg.sender, blockhash(block.number - 1));
     }
 
-    function getNestedStruct() public view returns(NestedStruct memory) {
-        return NestedStruct(getStruct());
+    function getNestedStruct1() public view returns(NestedStruct1 memory) {
+        return NestedStruct1(getStruct(), 1);
+    }
+
+    function getNestedStruct2() public view returns(NestedStruct2 memory) {
+        return NestedStruct2(2, getStruct());
+    }
+
+    function getNestedStructWithTuple1() public view returns(NestedStruct1 memory, uint256) {
+        return (NestedStruct1(getStruct(), 1), 1);
+    }
+
+    function getNestedStructWithTuple2() public view returns(uint256, NestedStruct2 memory) {
+        return (2, NestedStruct2(2, getStruct()));
     }
 
     function getEmptyList() public pure returns(uint256[] memory) {

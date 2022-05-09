@@ -11,10 +11,8 @@ contract FundMe {
 
     error InsufficientFund(uint256 given, uint256 required);
 
-    struct Book { 
-      string title;
-      string author;
-      uint book_id;
+    struct Sender {
+        address sender;
     }
 
     constructor() {
@@ -38,6 +36,14 @@ contract FundMe {
         return 123;
     }
 
+    function getSender() public view returns(address) {
+        return msg.sender;
+    }
+
+    function getSenderStruct() public view returns(Sender memory) {
+        return Sender(msg.sender);
+    }
+
     function getSecrets() public onlyOwner view returns(uint256 secret1, uint256 secret2) {
         return (123, 321);
     }
@@ -57,10 +63,6 @@ contract FundMe {
         addressToAmountFunded[msg.sender] += msg.value;
         funders.push(msg.sender);
         emit Fund(msg.sender, msg.value);
-    }
-
-    function getBook() public pure returns(Book memory) {
-        return Book('Learn Python', 'TP', 1);
     }
 
     function withdraw() public payable onlyOwner isOn {

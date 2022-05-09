@@ -1,4 +1,10 @@
-def ape_init_extras(accounts, config, networks):
+import json
+
+import click
+from ape.logging import logger
+
+
+def ape_init_extras(accounts, project, config, networks):
     ecosystem = networks.provider.network.ecosystem.name
     network = networks.provider.network.name
 
@@ -16,12 +22,22 @@ def ape_init_extras(accounts, config, networks):
                 extras["test_contract_address"] = latest_address
 
         # Mimic fixtures
+        owner = accounts.test_accounts[0]
         extras = {
-            "owner": accounts.test_accounts[0],
+            "owner": owner,
             "sender": accounts.test_accounts[1],
+            "fund_me": project.FundMe.deploy(sender=owner),
             **extras,
         }
-    except Exception:
+        index = 2
+        for acct in accounts.test_accounts[2:]:
+            extras[f"acct{index}"] = acct
+
+    except Exception as err:
+        logger.error(err)
         pass
 
+    extras["list_extras"] = lambda: click.echo(
+        json.dumps({k: str(v) for k, v in extras.items() if k != "list_extras"}, indent=2)
+    )
     return extras
