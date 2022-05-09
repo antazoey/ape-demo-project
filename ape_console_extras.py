@@ -32,6 +32,7 @@ def ape_init_extras(accounts, project, config, networks):
         index = 2
         for acct in accounts.test_accounts[2:]:
             extras[f"acct{index}"] = acct
+            index += 1
 
     except Exception as err:
         logger.error(err)
