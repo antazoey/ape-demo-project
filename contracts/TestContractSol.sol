@@ -23,6 +23,12 @@ contract TestContractSol {
         MyStruct t;
     }
 
+    struct WithArray {
+        uint256 foo;
+        MyStruct[2] arr;
+        uint256 bar;
+    }
+
     constructor() {
         owner = msg.sender;
     }
@@ -55,6 +61,11 @@ contract TestContractSol {
         return (2, NestedStruct2(2, getStruct()));
     }
 
+    function getStructWithArray() public view returns(WithArray memory) {
+        MyStruct[2] memory arr = [getStruct(), getStruct()];
+        return WithArray(1, arr, 2);
+    }
+
     function getEmptyList() public pure returns(uint256[] memory) {
         uint256[] memory data;
         return data;
@@ -73,6 +84,18 @@ contract TestContractSol {
     function getAddressList() public view returns(address[2] memory) {
         address[2] memory data = [msg.sender, msg.sender];
         return data;
+    }
+
+    function getDynamicStructList() public view returns(NestedStruct1[] memory) {
+        NestedStruct1[] memory data = new NestedStruct1[](2);
+        data[0] = NestedStruct1(getStruct(), 1);
+        data[1] = NestedStruct1(getStruct(), 2);
+        return data;
+    }
+
+    function getStaticStructList() public view returns(NestedStruct2[2] memory) {
+      NestedStruct2[2] memory data = [NestedStruct2(1, getStruct()), NestedStruct2(2, getStruct())];
+      return data;
     }
 
     function getNamedSingleItem() public pure returns(uint256 foo) {

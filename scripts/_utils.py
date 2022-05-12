@@ -2,13 +2,14 @@ from typing import Dict, Optional, Tuple, Union
 
 import click
 from ape import accounts, networks, project
-from ape.api import AccountAPI, ProviderAPI, TestAccountAPI
+from ape.api import AccountAPI, ProviderAPI, ReceiptAPI, TestAccountAPI
 from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.cli import get_user_selected_account
 from ape.contracts.base import ContractInstance
 from ape.exceptions import ApeException, ProviderError
 
 Account = Union[AccountAPI, TestAccountAPI]
+TXN_HASH = "0x5e82d8eb827d98a896cab196cca4e6cf90cb78fb8a7b18c610769843abf7c92a"
 
 
 class AccountLoader:
@@ -85,3 +86,7 @@ def get_owner_and_funder() -> Tuple[Account, Account]:
         return account_loader.get_account(
             prompt="Select the contract owner account"
         ), account_loader.get_account(prompt="Select the contract funder account")
+
+
+def get_useful_receipt() -> ReceiptAPI:
+    return networks.provider.get_transaction(TXN_HASH)

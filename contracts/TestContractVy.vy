@@ -20,6 +20,11 @@ struct NestedStruct2:
     foo: uint256
     t: MyStruct
 
+struct WithArray:
+    foo: uint256
+    arr: MyStruct[2]
+    bar: uint256
+
 @external
 def __init__():
     self.owner = msg.sender
@@ -57,6 +62,20 @@ def getNestedStructWithTuple1() -> (NestedStruct1, uint256):
 def getNestedStructWithTuple2() -> (uint256, NestedStruct2):
     return (2, NestedStruct2({foo: 2, t: MyStruct({a: msg.sender, b: block.prevhash})}))
 
+@view
+@external
+def getStructWithArray() -> WithArray:
+    return WithArray(
+        {
+            foo: 1,
+            arr: [
+                MyStruct({a: msg.sender, b: block.prevhash}),
+                MyStruct({a: msg.sender, b: block.prevhash})
+            ],
+            bar: 2
+        }
+    )
+
 @pure
 @external
 def getEmptyList() -> DynArray[uint256, 1]:
@@ -76,6 +95,23 @@ def getFilledList() -> DynArray[uint256, 3]:
 @external
 def getAddressList() -> DynArray[address, 2]:
     return [msg.sender, msg.sender]
+
+
+@view
+@external
+def getDynamicStructList() -> DynArray[NestedStruct1, 2]:
+    return [
+        NestedStruct1({t: MyStruct({a: msg.sender, b: block.prevhash}), foo: 1}),
+        NestedStruct1({t: MyStruct({a: msg.sender, b: block.prevhash}), foo: 2})
+    ]
+
+@view
+@external
+def getStaticStructList() -> NestedStruct2[2]:
+    return [
+        NestedStruct2({foo: 1, t: MyStruct({a: msg.sender, b: block.prevhash})}),
+        NestedStruct2({foo: 2, t: MyStruct({a: msg.sender, b: block.prevhash})})
+    ]
 
 @pure
 @external

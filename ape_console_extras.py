@@ -23,12 +23,17 @@ def ape_init_extras(accounts, project, config, networks):
 
         # Mimic fixtures
         owner = accounts.test_accounts[0]
+        logger.info(f"Deploying {project.FundMe} in ape_console_extras.py")
+        contract = project.FundMe.deploy(sender=owner)
         extras = {
             "owner": owner,
             "sender": accounts.test_accounts[1],
-            "fund_me": project.FundMe.deploy(sender=owner),
+            "fund_me": contract,
+            "contract": contract,
             **extras,
         }
+
+        # Add remaining accounts
         index = 2
         for acct in accounts.test_accounts[2:]:
             extras[f"acct{index}"] = acct
