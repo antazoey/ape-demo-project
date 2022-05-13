@@ -23,13 +23,14 @@ def test_fund_muliple_times_in_a_row(solidity_contract, funder):
     assert solidity_contract.addressToAmountFunded(funder) == FUND_AMOUNT * 3
 
 
-def test_fund_emits_event(solidity_contract, funder):
-    receipt = solidity_contract.fund(value=FUND_AMOUNT, sender=funder)
+@pytest.mark.parametrize("amount", (FUND_AMOUNT, FUND_AMOUNT * 2, FUND_AMOUNT * 3))
+def test_fund_emits_event(solidity_contract, funder, amount):
+    receipt = solidity_contract.fund(value=amount, sender=funder)
     event_type = solidity_contract.Fund
     fund_events = [e for e in event_type.from_receipt(receipt)]
     assert len(fund_events) == 1
     assert fund_events[0].funder == funder
-    assert fund_events[0].amount == FUND_AMOUNT
+    assert fund_events[0].amount == amount
 
 
 def test_fund_zero_value(solidity_contract, funder):
