@@ -77,7 +77,6 @@ def test_get_secrets(solidity_contract, owner):
     assert actual[0] == 123
 
 
-@pytest.mark.xfail(strict=False, reason="Waiting for APE PR to merge")
-def test_structs(solidity_contract):
-    actual = solidity_contract.getBook()
-    assert actual.title == "Learn Python"
+def test_structs(solidity_contract, owner):
+    actual = solidity_contract.getSenderStruct(sender=owner)
+    assert actual.sender == owner

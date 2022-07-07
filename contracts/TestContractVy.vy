@@ -3,10 +3,23 @@
 owner: public(address)
 myNumber: public(uint256)
 prevNumber: public(uint256)
+theAddress: public(address)
 
 event NumberChange:
+    b: bytes32
     prevNum: uint256
+    dynData: String[12]
     newNum: indexed(uint256)
+    dynIndexed: indexed(String[12])
+
+event AddressChange:
+    newAddress: indexed(address)
+
+event FooHappened:
+    foo: indexed(uint256)
+
+event BarHappened:
+    bar: indexed(uint256)
 
 struct MyStruct:
     a: address
@@ -30,12 +43,22 @@ def __init__():
     self.owner = msg.sender
 
 @external
+def fooAndBar():
+    log FooHappened(0)
+    log BarHappened(1)
+
+@external
 def setNumber(num: uint256):
     assert msg.sender == self.owner, "!authorized"
     assert num != 5
     self.prevNumber = self.myNumber
     self.myNumber = num
-    log NumberChange(self.prevNumber, num)
+    log NumberChange(block.prevhash, self.prevNumber, "Dynamic", num, "Dynamic")
+
+@external
+def setAddress(_address: address):
+    self.theAddress = _address
+    log AddressChange(_address)
 
 @view
 @external

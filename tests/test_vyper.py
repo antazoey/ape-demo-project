@@ -11,7 +11,7 @@ def test_set_number(vyper_contract, owner):
     assert logs[0].newNum == 3
 
 
-def test_set_nusmber_not_owner(vyper_contract, funder):
+def test_set_number_not_owner(vyper_contract, funder):
     with ape.reverts("!authorized"):
         vyper_contract.setNumber(3, sender=funder)
 

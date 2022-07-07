@@ -5,8 +5,27 @@ contract TestContractSol {
     address public owner;
     uint256 public myNumber;
     uint256 public prevNumber;
+    address public theAddress;
 
-    event NumberChange(uint256 prevNum, uint256 indexed newNum);
+    event NumberChange(
+        bytes32 b,
+        uint256 prevNum,
+        string dynData,
+        uint256 indexed newNum,
+        string indexed dynIndexed
+    );
+
+    event AddressChange(
+        address indexed newAddress
+    );
+
+    event FooHappened(
+        uint256 indexed foo
+    );
+
+    event BarHappened(
+        uint256 indexed bar
+    );
 
     struct MyStruct {
         address a;
@@ -33,12 +52,22 @@ contract TestContractSol {
         owner = msg.sender;
     }
 
+    function fooAndBar() public {
+        emit FooHappened(0);
+        emit BarHappened(1);
+    }
+
     function setNumber(uint256 num) public {
         require(msg.sender == owner, "!authorized");
         require(num != 5);
         prevNumber = myNumber;
         myNumber = num;
-        emit NumberChange(prevNumber, num);
+        emit NumberChange(blockhash(block.number - 1), prevNumber, "Dynamic", num, "Dynamic");
+    }
+
+    function setAddress(address _address) public {
+        theAddress = _address;
+        emit AddressChange(_address);
     }
 
     function getStruct() public view returns(MyStruct memory) {

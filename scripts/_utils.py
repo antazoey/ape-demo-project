@@ -62,7 +62,7 @@ account_loader = AccountLoader()
 
 
 def is_test_network() -> bool:
-    test_networks = [LOCAL_NETWORK_NAME]
+    test_networks = [LOCAL_NETWORK_NAME, "mainnet-fork"]
     return get_network_name() in test_networks
 
 

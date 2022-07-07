@@ -20,6 +20,10 @@ def main():
         financial_advice.transfer(funder, "1 ETH")
 
     contract = deploy(sender=owner)
+    deploy(sender=owner)
+    deploy(sender=owner)
+    contract.fund(value=100, sender=funder)
+    contract.fund(value=100, sender=funder)
     contract.fund(value=100, sender=funder)
     contract.fund(value=100, sender=funder)
     contract.withdraw(sender=owner)

@@ -7,18 +7,19 @@ plugins:
 # keyring:
 #   set_env_vars: true
 
+
 deployments:
   ethereum:
     rinkeby:
     - address: "0x0c25212c557d00024b7Ca3df3238683A35541354"
-      contract_type: TestContract
+      contract_type: TestContractSol
 
 ethereum:
-  #default_network: rinkeby-fork
+  default_network: rinkeby-fork
   rinkeby:
     default_provider: alchemy
-  # rinkeby_fork:
-  #   default_provider: hardhat
+  rinkeby_fork:
+    default_provider: hardhat
 
   mainnet:
     default_provider: alchemy
@@ -28,29 +29,37 @@ hardhat:
     ethereum:
       rinkeby:
         upstream_provider: alchemy
-
       mainnet:
         upstream_provider: alchemy
 
 dependencies:
+  - name: chainlink
+    github: smartcontractkit/chainlink-brownie-contracts
+    version: 0.4.1
+    contracts_folder: contracts/abi/v0.8
   - name: OpenZeppelin
     github: OpenZeppelin/openzeppelin-contracts
-    version: 4.4.2
-  - name: OpenZeppelin
-    github: OpenZeppelin/openzeppelin-contracts
-    version: 3.1.0
-  - name: ds-test
-    github: dapphub/ds-test
-    branch: master
-    contracts_folder: src
+    version: 4.6.0
+  # - name: OpenZeppelin
+  #   github: OpenZeppelin/openzeppelin-contracts
+  #   version: 3.1.0
+  # - name: ds-test
+  #   github: dapphub/ds-test
+  #   branch: master
+  #   contracts_folder: src
   - name: solidity-bytes-utils
     github: GNSPS/solidity-bytes-utils
     version: 0.8.0
-  - name: vault
-    github: yearn/yearn-vaults
-    version: 0.4.3
+  - name: v3-core
+    github: Uniswap/v3-core
+    branch: main
+  # - name: vault
+  #   github: yearn/yearn-vaults
+  #   version: 0.4.3
+
 
 solidity:
   import_remapping:
-    - "@openzeppelin=OpenZeppelin/4.4.2"
+    - "@openzeppelin/contracts=OpenZeppelin/4.6.0"
+    - "@openzeppelin=OpenZeppelin/4.6.0"
     - "@solidity-bytes-utils/contracts=solidity-bytes-utils/v0.8.0"
