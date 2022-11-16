@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-//import "@solidity-bytes-utils/contracts";
+import "@openzeppelin/contracts/utils/Checkpoints.sol";
 
 contract FundMe {
     address public owner;
@@ -31,8 +31,12 @@ contract FundMe {
     }
 
     event Fund(address indexed funder, uint256 amount);
+    event Collision(address indexed log_index);
 
-    function getSecret() public onlyOwner view returns(uint256 secret) {
+    event Nothing(address thing, address thing2);
+
+    function getSecret() public onlyOwner returns(uint256 secret) {
+	emit Collision(msg.sender);
         return 123;
     }
 

@@ -12,3 +12,25 @@ force_grid_wrap = 0
 include_trailing_comma = true
 multi_line_output = 3
 use_parentheses = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.poetry]
+name = "ape-demo-project"
+version = "0.1.0"
+description = ""
+authors = ["Juliya Smith <jules@apeworx.io>"]
+
+
+[tool.poetry.dependencies]
+python = "3.9.13"
+cairo-lang = "0.9.1"
+eth-ape = "0.4.4"
+ape-cairo = "0.4.0a0"
+ape-starknet = "0.4.0a1"
+ape-hardhat = "0.4.2"
+ape-solidity = "0.4.1"  
+starknet-devnet = "0.2.10"
+"starknet.py" = "0.4.6a0"
+web3 = "6.0.0b4"

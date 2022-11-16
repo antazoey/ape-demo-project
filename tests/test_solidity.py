@@ -68,8 +68,12 @@ def test_withdraw_disabled(solidity_contract, owner, funder):
 
 
 def test_get_secret(solidity_contract, owner):
-    actual = solidity_contract.getSecret(sender=owner)
-    assert actual == 123
+    receipt = solidity_contract.getSecret(sender=owner)
+    assert receipt
+
+    if solidity_contract.provider.name == "hardhat":
+        assert receipt.return_value == 123
+    
 
 
 def test_get_secrets(solidity_contract, owner):
@@ -78,5 +82,5 @@ def test_get_secrets(solidity_contract, owner):
 
 
 def test_structs(solidity_contract, owner):
-    actual = solidity_contract.getSenderStruct(sender=owner)
+    actual = solidity_contract.getSenderStruct()
     assert actual.sender == owner

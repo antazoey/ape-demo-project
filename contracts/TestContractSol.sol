@@ -6,6 +6,9 @@ contract TestContractSol {
     uint256 public myNumber;
     uint256 public prevNumber;
     address public theAddress;
+    mapping(address => uint256) public balances;
+    uint256[][3] dynArray;
+    uint256[][3][][5] mixedArray;
 
     event NumberChange(
         bytes32 b,
@@ -48,8 +51,21 @@ contract TestContractSol {
         uint256 bar;
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "!authorized");
+        _;
+    }
+
     constructor() {
         owner = msg.sender;
+
+        dynArray[0] = [uint(0)];
+        dynArray[1] = [uint(0), 1];
+        dynArray[2] = [uint(0), 1, 2];
+
+        mixedArray[0].push(dynArray);
+        mixedArray[1].push(dynArray);
+        mixedArray[1].push(dynArray);
     }
 
     function fooAndBar() public {
@@ -57,17 +73,21 @@ contract TestContractSol {
         emit BarHappened(1);
     }
 
-    function setNumber(uint256 num) public {
-        require(msg.sender == owner, "!authorized");
+    function setNumber(uint256 num) public onlyOwner {
         require(num != 5);
         prevNumber = myNumber;
         myNumber = num;
         emit NumberChange(blockhash(block.number - 1), prevNumber, "Dynamic", num, "Dynamic");
     }
 
-    function setAddress(address _address) public {
+    function setAddress(address _address) public returns(uint128) {
         theAddress = _address;
         emit AddressChange(_address);
+        return 123;
+    }
+
+    function setBalance(address _address, uint256 bal) public {
+        balances[_address] += bal;
     }
 
     function getStruct() public view returns(MyStruct memory) {
@@ -95,36 +115,47 @@ contract TestContractSol {
         return WithArray(1, arr, 2);
     }
 
-    function getEmptyList() public pure returns(uint256[] memory) {
+    function getEmptyArray() public pure returns(uint256[] memory) {
         uint256[] memory data;
         return data;
     }
 
-    function getSingleItemList() public pure returns(uint256[1] memory) {
+    function getSingleItemArray() public pure returns(uint256[1] memory) {
         uint256[1] memory data = [uint256(1)];
         return data;
     }
 
-    function getFilledList() public pure returns(uint256[3] memory) {
+    function getFilledArray() public pure returns(uint256[3] memory) {
         uint256[3] memory data = [uint256(1), uint256(2), uint256(3)];
         return data;
     }
 
-    function getAddressList() public view returns(address[2] memory) {
+    function getAddressArray() public view returns(address[2] memory) {
         address[2] memory data = [msg.sender, msg.sender];
         return data;
     }
 
-    function getDynamicStructList() public view returns(NestedStruct1[] memory) {
+    function getDynamicStructArray() public view returns(NestedStruct1[] memory) {
         NestedStruct1[] memory data = new NestedStruct1[](2);
         data[0] = NestedStruct1(getStruct(), 1);
         data[1] = NestedStruct1(getStruct(), 2);
         return data;
     }
 
-    function getStaticStructList() public view returns(NestedStruct2[2] memory) {
+    function getStaticStructArray() public view returns(NestedStruct2[2] memory) {
       NestedStruct2[2] memory data = [NestedStruct2(1, getStruct()), NestedStruct2(2, getStruct())];
       return data;
+    }
+
+    function getArrayWithBiggerSize() public pure returns(uint256[20] memory) {
+        uint256[20] memory data;
+        return data;
+    }
+
+    function getTupleOfArrays() public pure returns(uint256[20] memory, uint256[20] memory) {
+        uint256[20] memory data0;
+        uint256[20] memory data1;
+        return (data0, data1);
     }
 
     function getNamedSingleItem() public pure returns(uint256 foo) {
@@ -135,7 +166,45 @@ contract TestContractSol {
         return (123, 321);
     }
 
+    function getUnnamedTuple() public pure returns(uint256, uint256) {
+        return (0, 0);
+    }
+
     function getPartiallyNamedTuple() public pure returns(uint256 foo, uint256) {
         return (123, 321);
+    }
+
+    function getTupleOfAddressArray() public view returns(address[20] memory, int128[20] memory) {
+        address[20] memory addresses;
+        addresses[0] = msg.sender;
+        int128[20] memory data;
+        return (addresses, data);
+    }
+
+    function getNestedArrayFixedFixed() public view returns(uint256[2][3] memory) {
+        uint[2][3] memory arr = [[uint(1),2], [uint(3), 4], [uint(5), 6]];
+        return arr;
+    }
+
+    function getNestedArrayDynamicFixed() public view returns(uint256[2][] memory) {
+        uint[2][] memory arr = new uint[2][](3);
+        arr[0] = [uint(1), 2];
+        arr[1] = [uint(3), 4];
+        arr[2] = [uint(5), 6];
+        return arr;
+    }
+
+    function getNestedArrayFixedDynamic() public view returns(uint256[][3] memory) {
+        return dynArray;
+    }
+
+    function getNestedArrayMixedDynamic() public view returns(uint256[][3][][5] memory) {
+        return mixedArray;
+    }
+
+    function getNestedAddressArray() public view returns(address[3][] memory) {
+        address[3][] memory arr = new address[3][](2);
+        arr[0] = [msg.sender, msg.sender, msg.sender];
+        return arr;
     }
 }

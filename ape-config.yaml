@@ -1,6 +1,6 @@
 plugins:
   - name: solidity
-  - name: alchemy
+  # - name: alchemy
   - name: hardhat
   - name: keyring
 
@@ -15,22 +15,27 @@ deployments:
       contract_type: TestContractSol
 
 ethereum:
-  default_network: rinkeby-fork
-  rinkeby:
-    default_provider: alchemy
-  rinkeby_fork:
-    default_provider: hardhat
-
   mainnet:
     default_provider: alchemy
+  #default_network: rinkeby-fork
+  # rinkeby:
+  #   default_provider: alchemy
+  # rinkeby_fork:
+  #   default_provider: hardhat
 
-hardhat:
-  fork:
-    ethereum:
-      rinkeby:
-        upstream_provider: alchemy
-      mainnet:
-        upstream_provider: alchemy
+  # mainnet:
+  #   default_provider: alchemy
+
+# hardhat:
+#   request_timeout: 30  # Defaults to 30
+#   fork_request_timeout: 200  # Defaults to 300
+
+#   fork:
+#     ethereum:
+      # rinkeby:
+      #   upstream_provider: alchemy
+      # mainnet:
+      #   upstream_provider: alchemy
 
 dependencies:
   - name: chainlink
@@ -53,9 +58,9 @@ dependencies:
   - name: v3-core
     github: Uniswap/v3-core
     branch: main
-  # - name: vault
-  #   github: yearn/yearn-vaults
-  #   version: 0.4.3
+  - name: vault
+    github: yearn/yearn-vaults
+    version: 0.4.3
 
 
 solidity:
@@ -63,3 +68,12 @@ solidity:
     - "@openzeppelin/contracts=OpenZeppelin/4.6.0"
     - "@openzeppelin=OpenZeppelin/4.6.0"
     - "@solidity-bytes-utils/contracts=solidity-bytes-utils/v0.8.0"
+
+geth:
+  polygon:
+    mumbai:
+      uri: https://rpc.ftm.tools
+
+  fantom:
+    opera:
+      uri: https://rpc.ftm.tools
