@@ -73,7 +73,6 @@ def test_get_secret(solidity_contract, owner):
 
     if solidity_contract.provider.name == "hardhat":
         assert receipt.return_value == 123
-    
 
 
 def test_get_secrets(solidity_contract, owner):
@@ -82,5 +81,5 @@ def test_get_secrets(solidity_contract, owner):
 
 
 def test_structs(solidity_contract, owner):
-    actual = solidity_contract.getSenderStruct()
+    actual = solidity_contract.getSenderStruct(sender=owner)
     assert actual.sender == owner

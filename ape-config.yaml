@@ -1,6 +1,6 @@
 plugins:
   - name: solidity
-  # - name: alchemy
+  - name: alchemy
   - name: hardhat
   - name: keyring
 
@@ -8,34 +8,9 @@ plugins:
 #   set_env_vars: true
 
 
-deployments:
-  ethereum:
-    rinkeby:
-    - address: "0x0c25212c557d00024b7Ca3df3238683A35541354"
-      contract_type: TestContractSol
-
 ethereum:
   mainnet:
     default_provider: alchemy
-  #default_network: rinkeby-fork
-  # rinkeby:
-  #   default_provider: alchemy
-  # rinkeby_fork:
-  #   default_provider: hardhat
-
-  # mainnet:
-  #   default_provider: alchemy
-
-# hardhat:
-#   request_timeout: 30  # Defaults to 30
-#   fork_request_timeout: 200  # Defaults to 300
-
-#   fork:
-#     ethereum:
-      # rinkeby:
-      #   upstream_provider: alchemy
-      # mainnet:
-      #   upstream_provider: alchemy
 
 dependencies:
   - name: chainlink
@@ -45,13 +20,6 @@ dependencies:
   - name: OpenZeppelin
     github: OpenZeppelin/openzeppelin-contracts
     version: 4.6.0
-  # - name: OpenZeppelin
-  #   github: OpenZeppelin/openzeppelin-contracts
-  #   version: 3.1.0
-  # - name: ds-test
-  #   github: dapphub/ds-test
-  #   branch: master
-  #   contracts_folder: src
   - name: solidity-bytes-utils
     github: GNSPS/solidity-bytes-utils
     version: 0.8.0
@@ -61,7 +29,6 @@ dependencies:
   - name: vault
     github: yearn/yearn-vaults
     version: 0.4.3
-
 
 solidity:
   import_remapping:
