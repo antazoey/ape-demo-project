@@ -44,3 +44,10 @@ geth:
   fantom:
     opera:
       uri: https://rpc.ftm.tools
+
+console:
+ plugins:
+  - "autoreload"
+
+audius:
+  app_name: "Test audius app"

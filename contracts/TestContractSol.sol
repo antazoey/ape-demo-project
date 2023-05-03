@@ -51,6 +51,8 @@ contract TestContractSol {
         uint256 bar;
     }
 
+    error FooError(address addr, uint256 counter);
+
     modifier onlyOwner() {
         require(msg.sender == owner, "!authorized");
         _;
@@ -66,6 +68,11 @@ contract TestContractSol {
         mixedArray[0].push(dynArray);
         mixedArray[1].push(dynArray);
         mixedArray[1].push(dynArray);
+    }
+
+    function raiseFooError() public {
+        prevNumber = 123;
+        revert FooError(msg.sender, 123);
     }
 
     function fooAndBar() public {

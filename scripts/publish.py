@@ -15,4 +15,4 @@ def cli(network, address):
         explorer.publish_contract(address)
 
     else:
-        project.RunTheJules.deploy(owner, "Jules", "JUL", sender=owner, publish=True)
+        project.RunTheJules2Contract.deploy(owner, "Jules", "JUL", sender=owner, publish=True)
