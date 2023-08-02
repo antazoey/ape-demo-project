@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/utils/Checkpoints.sol";
-
 contract FundMe {
     address public owner;
     mapping(address => uint256) public addressToAmountFunded;

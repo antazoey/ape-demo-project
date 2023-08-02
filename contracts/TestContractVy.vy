@@ -58,8 +58,8 @@ def fooAndBar():
 
 @external
 def setNumber(num: uint256):
-    assert msg.sender == self.owner, "!authorized"
-    assert num != 5
+    assert msg.sender == self.owner  # dev: !authorized
+    assert num != 5  # dev: five
     self.prevNumber = self.myNumber
     self.myNumber = num
     log NumberChange(block.prevhash, self.prevNumber, "Dynamic", num, "Dynamic")

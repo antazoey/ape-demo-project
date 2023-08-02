@@ -12,5 +12,6 @@ from ._utils import deploy
 @click.command(cls=NetworkBoundCommand)
 @network_option()
 @click.option("--contract", help="The contract to deploy.", default="FundMe")
-def cli(network, contract):
-    deploy(contract_type=contract)
+@click.option("--publish", is_flag=True)
+def cli(network, contract, publish):
+    deploy(contract_type=contract, publish=publish)

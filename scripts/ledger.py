@@ -1,39 +1,60 @@
-from ape import accounts, project
+import click
+from ape import accounts, chain, convert, project
+from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.logging import logger
+
+
+class LedgerCheck:
+    def __init__(self, name, fn) -> None:
+        self.name = name
+        self.fn = fn
+
+    def run(self):
+        try:
+            return True, self.fn()
+        except Exception as err:
+            return False, str(err)
 
 
 def main():
     logger.info("Starting simulation...")
 
-    funder = accounts.test_accounts[5]
-
     try:
-        account = accounts.load("main")
+        account = accounts.load("ledger")
     except IndexError:
         logger.error("Ledger plugin has likely failed to load :(")
         return
 
-    logger.info("Funding main account...")
-    funder.transfer(account, "900 ETH")
-    logger.success("Funding complete!")
-    assert account.balance
+    net_name = chain.provider.network.name
+    is_local = net_name == LOCAL_NETWORK_NAME or net_name.endswith("-fork")
+    if is_local:
+        logger.info("Funding account...")
+        requested_bal = convert("900 ETH", int)
+        current_bal = account.balance
+        difference = requested_bal - current_bal
+        if difference:
+            try:
+                account.balance += difference
+            except NotImplemented:
+                funder = accounts.test_accounts[5]
+                funder.transfer(account, difference)
 
-    logger.info("Deploying smart contract using Static txn...")
-    account.deploy(project.FundMe, type=0)
-    logger.success("Smart contract deployed!")
+        logger.success("Funding complete!")
 
-    logger.info("Deploying smart contract using Dynamic txn...")
-    account.deploy(project.FundMe, gas_limit=30029122)
-    logger.success("Smart contract deployed!")
+    checks = [
+        LedgerCheck("Deploy - STATIC", lambda: account.deploy(project.FundMe, type=0)),
+        LedgerCheck("Deploy - DYNAMIC", lambda: account.deploy(project.FundMe, type=1)),
+        LedgerCheck("Transfer - STATIC", lambda: account.deploy(project.FundMe, type=0)),
+        LedgerCheck("Transfer - DYNAMIC", lambda: account.deploy(project.FundMe, type=1)),
+    ]
 
-    logger.info("Returning funds to funder statically...")
-    account.transfer(funder, "400 ETH", type=0)
-    logger.success("Refunding complete!")
-    assert account.balance
+    results = []
+    for check in checks:
+        passed, res = check.run()
+        passed_str = "PASSED" if passed else "FAILED"
+        results.append(f"{passed_str} - {check.name}")
 
-    logger.info("Returning funds to funder statically...")
-    account.transfer(funder, "400 ETH")
-    logger.success("Refunding complete!")
-    assert account.balance
+    for res in results:
+        click.echo(res)
 
     logger.success("Simulation complete!")

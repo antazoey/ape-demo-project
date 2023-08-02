@@ -1,53 +1,11 @@
-plugins:
-  - name: solidity
-  - name: alchemy
-  - name: hardhat
-  - name: keyring
-
-# keyring:
-#   set_env_vars: true
-
-
-ethereum:
-  mainnet:
-    default_provider: alchemy
-
-dependencies:
-  - name: chainlink
-    github: smartcontractkit/chainlink-brownie-contracts
-    version: 0.4.1
-    contracts_folder: contracts/abi/v0.8
-  - name: OpenZeppelin
-    github: OpenZeppelin/openzeppelin-contracts
-    version: 4.6.0
-  - name: solidity-bytes-utils
-    github: GNSPS/solidity-bytes-utils
-    version: 0.8.0
-  - name: v3-core
-    github: Uniswap/v3-core
-    branch: main
-  - name: vault
-    github: yearn/yearn-vaults
-    version: 0.4.3
-
-solidity:
-  import_remapping:
-    - "@openzeppelin/contracts=OpenZeppelin/4.6.0"
-    - "@openzeppelin=OpenZeppelin/4.6.0"
-    - "@solidity-bytes-utils/contracts=solidity-bytes-utils/v0.8.0"
 
 geth:
-  polygon:
-    mumbai:
-      uri: https://rpc.ftm.tools
+  ethereum:
+    mainnet:
+      uri: https://eth-mainnet.g.alchemy.com/v2/FEfXJpnhuYHmL37QrN6nfdtwRTZvs_oO
 
-  fantom:
-    opera:
-      uri: https://rpc.ftm.tools
-
-console:
- plugins:
-  - "autoreload"
-
-audius:
-  app_name: "Test audius app"
+hardhat:
+  fork:
+    ethereum:
+      mainnet:
+        upstream_provider: geth

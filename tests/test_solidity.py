@@ -79,6 +79,26 @@ def test_get_secrets(solidity_contract, owner):
     assert actual[0] == 123
 
 
-def test_structs(solidity_contract, owner):
+def test_structs(solidity_contract, owner, addr, addr_fn, secret):
     actual = solidity_contract.getSenderStruct(sender=owner)
     assert actual.sender == owner
+    assert False
+
+
+@pytest.fixture(scope="session")
+def addr():
+    return "0xb5ed1ef2a90527b402cd7e7d415027cb94e1db4e"
+
+
+@pytest.fixture
+def addr_fn():
+    return "0xb5ed1ef2a90527b402cd7e7d415027cb94e1db4e"
+
+
+@pytest.fixture(params=[1, 2])
+def secret(request):
+    return request.param
+
+
+def test_inter(secret, addr, addr_fn):
+    assert False
