@@ -1,6 +1,6 @@
 import click
 from ape import convert
-from ape.cli import Abort
+from ape.exceptions import Abort
 
 from ._utils import get_provider
 

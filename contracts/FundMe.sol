@@ -54,6 +54,11 @@ contract FundMe {
         return (123, 321);
     }
 
+
+    function getSecretsNotAllNamed2d() public onlyOwner view returns(uint256, uint256 secret2) {
+        return (123, 321);
+    }
+
     function changeOnStatus(bool newValue) public onlyOwner {
         enabled = newValue;
     }

@@ -1,6 +1,23 @@
+geth:
+  ethereum:
+    local:
+      uri: http://127.0.0.1:5550
+      extra_funded_accounts:
+        - 0x63c7f11162dBFC374DC6f5C0B3Aa26C618846a85  # Test account number 99.
 
-hardhat:
-  fork:
-    ethereum:
-      mainnet:
-        upstream_provider: geth
+ethereum:
+  default_network: local
+  local:
+    default_provider: geth
+
+test:
+  number_of_accounts: 100
+
+dependencies:
+  - name: OpenZeppelin
+    github: OpenZeppelin/openzeppelin-contracts
+    version: 4.4.2
+  
+solidity:
+  import_remapping:
+    - "@openzeppelin=OpenZeppelin/4.4.2"

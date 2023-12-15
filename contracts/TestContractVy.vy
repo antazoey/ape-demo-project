@@ -1,4 +1,6 @@
 # @version 0.3.7
+#pragma optimize codesize
+
 
 event NumberChange:
     b: bytes32

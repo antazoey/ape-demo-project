@@ -1,13 +1,13 @@
-from functools import partial
 import time
+from functools import partial
 
 import click
 from ape import accounts, chain, convert, project
 from ape.api.networks import LOCAL_NETWORK_NAME
 from ape.cli import ConnectedProviderCommand
 from ape.logging import logger
-from eth_account.account import Account
 from eip712.messages import EIP712Message, EIP712Type
+from eth_account.account import Account
 from eth_account.messages import encode_defunct
 
 
